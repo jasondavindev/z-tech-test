@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { resolve } = require('path');
 
 module.exports = {
   env: {
@@ -19,7 +19,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'import', 'import-helpers', 'prettier'],
   extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended', 'prettier/@typescript-eslint'],
   rules: {
-    semi: ['error', 'never'],
+    semi: ['error', 'always'],
     'import-helpers/order-imports': [
       'warn',
       {
@@ -57,4 +57,4 @@ module.exports = {
       typescript: {}
     }
   }
-}
+};

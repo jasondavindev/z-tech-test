@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["es5", "es6"],
+    "target": "ES2017",
+    "lib": ["es6"],
     "module": "CommonJS",
     "moduleResolution": "node",
     "outDir": "dist",
@@ -12,7 +12,7 @@
     "removeComments": true,
     "strict": false,
     "resolveJsonModule": true,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "src/@types"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "noImplicitReturns": false,
@@ -20,6 +20,7 @@
     "noImplicitThis": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "typescript-tslint-plugin"
@@ -28,7 +29,12 @@
     "paths": {
       "~/*": ["src/api/*"],
       "@/*": ["src/*"],
-      "test/*": ["__tests__/*"]
+      "test/*": ["__tests__/*"],
+      "@controllers/": ["src/api/controllers"],
+      "@middlewares/": ["src/api/middlewares"],
+      "@services/": ["src/api/services"],
+      "@repositories/": ["src/api/repositories"],
+      "@models/": ["src/database/models"]
     },
     "rootDir": ".",
     "baseUrl": "."
