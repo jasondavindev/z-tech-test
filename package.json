@@ -5,7 +5,15 @@
   "author": "jasondavindev <jasondavin.dev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "format": "prettier --config ./.prettierrc --no-editorconfig --write \"{src,__tests__}/**/*.*(ts|json|yaml|yml)\"",
+    "lint": "eslint 'src/**/*.ts' '__tests__/**/*.ts' --fix",
+    "formalint": "yarn format && yarn lint",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "run:migrations:dev": "yarn typeorm migration:run -c development",
+    "run:migrations:test": "yarn typeorm migration:run -c test",
+    "run:seeds": "NODE_ENV=development IS_SEED=1 yarn typeorm migration:run -c development",
+    "test": "NODE_ENV=test jest --maxWorkers=0"
   },
   "dependencies": {
     "class-transformer": "^0.2.3",
@@ -24,7 +32,8 @@
     "typedi": "^0.8.0",
     "typeorm": "^0.2.25",
     "typeorm-typedi-extensions": "^0.2.3",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",

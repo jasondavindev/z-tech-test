@@ -62,8 +62,8 @@ function dktest {
 
 function db_setup {
   docker-compose up -d db
-  docker exec -ti ${PROJECT_NAME}-db psql -U postgres -c "create database z_tech_development"
-  docker exec -ti ${PROJECT_NAME}-db psql -U postgres -c "create database z_tech_test"
+  docker exec -ti z-tech-db psql -U postgres -c "create database z_tech_development"
+  docker exec -ti z-tech-db psql -U postgres -c "create database z_tech_test"
   docker-compose run --rm "app" yarn run run:migrations:dev
   docker-compose run --rm "app" yarn run run:migrations:test
   docker-compose down
