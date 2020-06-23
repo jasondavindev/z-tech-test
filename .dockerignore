@@ -1,0 +1,10 @@
+.vscode
+node_modules
+.editorconfig
+.env.example
+.gitignore
+README.md
+docker/volumes
+.git
+__tests__
+dist
