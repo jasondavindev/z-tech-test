@@ -11,15 +11,15 @@ export default class BaseModel<T> {
   @CreateDateColumn({ name: 'created_at' })
   @IsDate()
   @IsOptional()
-  createdAt?: Date
+  createdAt?: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   @IsDate()
   @IsOptional()
-  updatedAt?: Date
+  updatedAt?: Date;
 
   @DeleteDateColumn({ name: 'deleted_at' })
   @IsDate()
   @IsOptional()
-  deletedAt?: Date
+  deletedAt?: Date;
 }
