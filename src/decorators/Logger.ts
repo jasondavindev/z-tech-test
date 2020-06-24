@@ -1,6 +1,6 @@
 import { createLogger as winstonCreateLogger, format, transports } from 'winston';
 
-import { LogOptions, LoggerInterface } from '@/types/logger';
+import { LogOptions, LoggerInterface } from '@/types/Logger';
 
 const logFormat = () => format.printf(
   ({ level, message, stack }) => `[${new Date().toISOString()}] [${level}] ${message}${

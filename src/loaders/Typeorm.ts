@@ -2,7 +2,7 @@ import { MicroframeworkSettings } from 'microframework-w3tec';
 import { Container } from 'typedi';
 import { createConnection, ConnectionOptions, useContainer, Connection } from 'typeorm';
 
-import envs from '@/configs/envs';
+import envs from '@/configs/Envs';
 
 export const connectionOptions: ConnectionOptions = {
   type: 'postgres',

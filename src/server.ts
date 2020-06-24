@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import { bootstrapMicroframework } from 'microframework-w3tec';
 
-import { createLogger } from '@/decorators/logger';
-import express from '@/loaders/express';
-import typeorm from '@/loaders/typeorm';
+import { createLogger } from '@/decorators/Logger';
+import express from '@/loaders/Express';
+import typeorm from '@/loaders/Typeorm';
 
 const logger = createLogger();
 

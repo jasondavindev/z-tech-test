@@ -27,14 +27,14 @@
       }
     ],
     "paths": {
-      "~/*": ["src/api/*"],
-      "@/*": ["src/*"],
-      "test/*": ["__tests__/*"],
-      "@controllers/": ["src/api/controllers"],
-      "@middlewares/": ["src/api/middlewares"],
-      "@services/": ["src/api/services"],
-      "@repositories/": ["src/api/repositories"],
-      "@models/": ["src/database/models"]
+      "@controllers/*": ["./src/api/controllers/*"],
+      "@middlewares/*": ["./src/api/middlewares/*"],
+      "@services/*": ["./src/api/services/*"],
+      "@repositories/*": ["./src/api/repositories/*"],
+      "@models/*": ["./src/database/models/*"],
+      "~/*": ["./src/api/*"],
+      "@/*": ["./src/*"],
+      "test/*": ["./__tests__/*"]
     },
     "rootDir": ".",
     "baseUrl": "."
