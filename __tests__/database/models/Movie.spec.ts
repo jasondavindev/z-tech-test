@@ -1,3 +1,4 @@
+import { buildActor } from 'test/factories/Actor';
 import { buildMovie } from 'test/factories/Movie';
 import Validation from 'test/helpers/Validation';
 
@@ -23,6 +24,26 @@ describe('models/Movie', () => {
           isNotEmpty: 'name should not be empty'
         }
       });
+    });
+  });
+
+  describe('when has more than ten actors', () => {
+    it('returns an error', () => {
+      const actors = Array(11).fill(buildActor);
+      const movie = buildMovie({ actors } as Movie);
+
+      expect(Validation(movie)).toEqual({
+        actors: {
+          maxLength: 'a movie can have a maximum of ten actors'
+        }
+      });
+    });
+  });
+
+  describe('when is passed valid data', () => {
+    it('returns empty object', () => {
+      const movie = buildMovie();
+      expect(Validation(movie)).toEqual({});
     });
   });
 });

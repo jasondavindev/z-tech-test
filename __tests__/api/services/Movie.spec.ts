@@ -30,5 +30,12 @@ describe('services/Movie', () => {
         expect(service.create(movie)).rejects.toThrowError();
       });
     });
+
+    describe('when the movie is ok', () => {
+      it('creates the movie', async () => {
+        const movie = buildMovie({ name: 'Test' } as Movie);
+        expect(service.create(movie)).resolves.toBeDefined();
+      });
+    });
   });
 });

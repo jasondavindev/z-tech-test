@@ -1,4 +1,4 @@
-import { IsEnum, IsDate, IsString, IsNotEmpty, IsOptional, IsArray } from 'class-validator';
+import { IsEnum, IsDate, IsString, IsNotEmpty, IsOptional, IsArray, MaxLength } from 'class-validator';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 import CensorshipLevel from '@/types/CensorshipLevel';
@@ -26,6 +26,7 @@ export default class Movie extends BaseModel<Movie> {
 
   @IsOptional()
   @IsArray()
+  @MaxLength(10, { message: 'a movie can have a maximum of ten actors' })
   @OneToMany(() => Actor, (actor) => actor.movie)
   actors?: Actor[];
 }
