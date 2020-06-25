@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "c92081ac-63f8-45d0-bc1f-64f621b8e415",
+		"name": "Z-Tech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": {\n        \"name\": \"The batman movie\",\n        \"releaseDate\": \"2020-06-25T22:15:38.810Z\",\n        \"censorshipLevel\": \"CENSURADO\",\n        \"actors\": [\n            { \"name\":\"Fofão\" }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/movies",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/movies?censorship=Censored&page=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies"
+							],
+							"query": [
+								{
+									"key": "censorship",
+									"value": "NotCensored",
+									"disabled": true
+								},
+								{
+									"key": "censorship",
+									"value": "Censored"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

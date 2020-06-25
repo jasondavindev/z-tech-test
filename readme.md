@@ -12,6 +12,10 @@
 
 Integrado com GitHub Actions
 
+## Rotas
+
+As rotas e parâmetros foram adicionados na pasta `postman`
+
 ## Executando
 
 Exporte as funções shell
@@ -32,8 +36,16 @@ Inicie a aplicação em dettach mode
 dkupd
 ```
 
+Aplicação rodando na porta [localhost:3000](http://localhost:3000/api/v1/movies)
+
 Rode os testes
 
 ```bash
 dktest
+```
+
+Derrube os containers
+
+```bash
+dkdown
 ```

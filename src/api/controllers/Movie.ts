@@ -37,10 +37,10 @@ export default class MovieController {
 
   @Get('/')
   async index(
-    @QueryParam('censorship') censorshipLevelParam: CensorshipLevel,
+    @QueryParam('censorship', { validate: false }) censorshipLevelParam: string,
       @QueryParam('page') page = 1
   ): Promise<Movie[]> {
-    const filter = censorshipLevelParam in CensorshipLevel
+    const filter = CensorshipLevel[censorshipLevelParam]
       ? { censorshipLevel: CensorshipLevel[censorshipLevelParam] }
       : {};
 
