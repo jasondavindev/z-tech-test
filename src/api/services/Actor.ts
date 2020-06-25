@@ -12,15 +12,11 @@ export default class ActorService {
 
   private async findByNameOrId(actors: Actor[]): Promise<Actor[]> {
     const names = actors.map((actor) => actor?.name);
-    const ids = actors.filter(isNumber);
 
     return this.repository.find({
       where: [
         {
           name: In(names)
-        },
-        {
-          id: In(ids)
         }
       ]
     });
@@ -31,10 +27,14 @@ export default class ActorService {
     const foundActorsNames = foundActors.map((actor) => actor.name);
 
     const notFoundActors = actors.filter(
-      (actor) => (actor as Object)?.hasOwnProperty('name') && !foundActorsNames.includes(actor.name)
+      (actor) => actor.name && !foundActorsNames.includes(actor.name)
     );
 
-    const createdActors = await this.repository.save(notFoundActors);
+    let createdActors: Actor[] = [];
+
+    if (notFoundActors.length) {
+      createdActors = await this.repository.save(notFoundActors);
+    }
 
     return foundActors.concat(createdActors);
   }

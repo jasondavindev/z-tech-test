@@ -36,9 +36,9 @@ describe('controller/Movie', () => {
 
     describe('when has 10 actors or less', () => {
       it('returns CREATED', async () => {
-        const [{ id }, actor2] = await populateActor(2);
-        const actor3 = buildActor();
-        const movie = buildMovie({ actors: [id, actor2, actor3] } as Movie);
+        const [actor1] = await populateActor(2);
+        const actor2 = buildActor();
+        const movie = buildMovie({ actors: [actor1, actor2] } as Movie);
 
         await request(app).post('/api/v1/movies').send({ movie }).expect(CREATED);
       });

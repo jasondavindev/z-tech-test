@@ -33,7 +33,7 @@ describe('services/Movie', () => {
 
     describe('when the movie is ok', () => {
       it('creates the movie', async () => {
-        const movie = buildMovie({ name: 'Test' } as Movie);
+        const movie = buildMovie({ name: 'New Test' } as Movie);
         expect(service.create(movie)).resolves.toBeDefined();
       });
     });
