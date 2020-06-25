@@ -51,7 +51,7 @@ describe('services/Movie', () => {
           censorshipLevel: CensorshipLevel.Censored
         } as Movie);
 
-        await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+        await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensored } as Movie);
 
         const result = await service.find({ where: { censorshipLevel: CensorshipLevel.Censored } });
 
@@ -65,7 +65,7 @@ describe('services/Movie', () => {
           censorshipLevel: CensorshipLevel.Censored
         } as Movie);
 
-        await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+        await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensored } as Movie);
 
         const result = await service.find();
 

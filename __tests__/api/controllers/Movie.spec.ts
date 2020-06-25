@@ -56,7 +56,7 @@ describe('controller/Movie', () => {
             censorshipLevel: CensorshipLevel.Censored
           } as Movie);
 
-          await populateMovie(2, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+          await populateMovie(2, { censorshipLevel: CensorshipLevel.NotCensored } as Movie);
 
           const { body } = await request(app).get('/api/v1/movies?censorship=Censored');
           expect(body).toHaveLength(4);
@@ -69,7 +69,7 @@ describe('controller/Movie', () => {
             censorshipLevel: CensorshipLevel.Censored
           } as Movie);
 
-          await populateMovie(2, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+          await populateMovie(2, { censorshipLevel: CensorshipLevel.NotCensored } as Movie);
 
           const { body } = await request(app).get('/api/v1/movies?censorship=tam');
           expect(body).toHaveLength(6);
@@ -83,7 +83,7 @@ describe('controller/Movie', () => {
           censorshipLevel: CensorshipLevel.Censored
         } as Movie);
 
-        await populateMovie(2, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+        await populateMovie(2, { censorshipLevel: CensorshipLevel.NotCensored } as Movie);
 
         const { body } = await request(app).get('/api/v1/movies');
         expect(body).toHaveLength(6);
