@@ -97,6 +97,7 @@ describe('controller/Movie', () => {
         expect((await request(app).get('/api/v1/movies')).body).toHaveLength(10);
         expect((await request(app).get('/api/v1/movies?page=2')).body).toHaveLength(10);
         expect((await request(app).get('/api/v1/movies?page=3')).body).toHaveLength(5);
+        expect((await request(app).get('/api/v1/movies?page=-4')).body).toHaveLength(10);
       });
     });
   });

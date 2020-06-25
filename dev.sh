@@ -7,15 +7,6 @@ YELLOW='\e[0;33m'
 export PROJECT_NAME=z_tech
 export PROJECT_BASE=$(pwd)
 
-function dkbuild {
-  CD=$(pwd)
-  cd $PROJECT_BASE
-  docker-compose build --force-rm --no-cache app
-  exitcode=$?
-  cd $CD
-  return $exitcode
-}
-
 function dkupd {
   CD=$(pwd)
   cd $PROJECT_BASE
@@ -80,19 +71,21 @@ function setup_dev_environment {
 function devhelp {
   echo -e "${GREEN}devhelp${RESTORE}                Prints ${RED}devhelp${RESTORE}"
   echo -e ""
-  echo -e "${GREEN}db_setup${RESTORE}               ${RED}Setup environment${RESTORE}"
+  echo -e "${GREEN}setup_dev_environment${RESTORE}  ${RED}Setup dev environment (node packages, database and migrations)${RESTORE}"
   echo -e ""
-  echo -e "${GREEN}dkbuild${RESTORE}                ${RED}Builds project docker image${RESTORE}"
+  echo -e "${GREEN}db_setup${RESTORE}               ${RED}Setup database${RESTORE}"
   echo -e ""
   echo -e "${GREEN}pkg_install${RESTORE}            ${RED}Install node packages${RESTORE}"
   echo -e ""
-  echo -e "${GREEN}dkupa${RESTORE}                  ${RED}Starts docker services${RESTORE} in attach mode (at first time, runs pkg_install)"
+  echo -e "${GREEN}dkupa${RESTORE}                  ${RED}Starts docker services${RESTORE} in attach mode"
   echo -e ""
-  echo -e "${GREEN}dkupd${RESTORE}                  ${RED}Starts docker services${RESTORE} in detached mode (at first time, runs pkg_install)"
+  echo -e "${GREEN}dkupd${RESTORE}                  ${RED}Starts docker services${RESTORE} in detached mode"
   echo -e ""
   echo -e "${GREEN}dk \"cmd\"${RESTORE}               ${RED}Runs the 'cmd' command inside the container"
   echo -e ""
   echo -e "${GREEN}dkdown${RESTORE}                 ${RED}Stop and remove docker containers${RESTORE}"
+  echo -e ""
+  echo -e "${GREEN}dktest${RESTORE}                 ${RED}Run all tests${RESTORE}"
   echo -e ""
 }
 

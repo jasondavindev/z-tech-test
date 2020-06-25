@@ -48,7 +48,7 @@ export default class MovieController {
   }
 
   private buildPagination({ page = 1, limit = 10 }: { page: number; limit?: number }) {
-    const skip = (page - 1) * limit;
+    const skip = ((page < 0 ? 1 : page) - 1) * limit;
     return { take: limit, skip };
   }
 }
