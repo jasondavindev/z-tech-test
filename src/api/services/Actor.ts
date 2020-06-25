@@ -23,6 +23,8 @@ export default class ActorService {
   }
 
   async findOrCreateList(actors: Actor[]): Promise<Actor[]> {
+    if (!actors.length) return [];
+
     const foundActors = await this.findByNameOrId(actors);
     const foundActorsNames = foundActors.map((actor) => actor.name);
 

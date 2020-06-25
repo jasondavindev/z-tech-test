@@ -1,3 +1,4 @@
+import { buildActor } from 'test/factories/Actor';
 import { populateMovie, buildMovie } from 'test/factories/Movie';
 import cleanTables from 'test/helpers/Database';
 import Container from 'typedi';
@@ -18,7 +19,7 @@ describe('services/Movie', () => {
 
   afterAll(async () => {
     await cleanTables(connection, [Movie]);
-    return connection.close();
+    await connection.close();
   });
 
   describe('#create', () => {
@@ -33,8 +34,9 @@ describe('services/Movie', () => {
 
     describe('when the movie is ok', () => {
       it('creates the movie', async () => {
-        const movie = buildMovie({ name: 'New Test' } as Movie);
-        expect(service.create(movie)).resolves.toBeDefined();
+        const actor = buildActor();
+        const movie = buildMovie({ actors: [actor] } as Movie);
+        expect(await service.create(movie)).toBeDefined();
       });
     });
   });
