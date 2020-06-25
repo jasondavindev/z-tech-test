@@ -36,11 +36,19 @@ export default class MovieController {
   }
 
   @Get('/')
-  async index(@QueryParam('censorship') censorshipLevelParam: CensorshipLevel): Promise<Movie[]> {
+  async index(
+    @QueryParam('censorship') censorshipLevelParam: CensorshipLevel,
+      @QueryParam('page') page = 1
+  ): Promise<Movie[]> {
     const filter = censorshipLevelParam in CensorshipLevel
       ? { censorshipLevel: CensorshipLevel[censorshipLevelParam] }
       : {};
 
-    return this.movieService.find(filter);
+    return this.movieService.find({ where: filter, ...this.buildPagination({ page }) });
+  }
+
+  private buildPagination({ page = 1, limit = 10 }: { page: number; limit?: number }) {
+    const skip = (page - 1) * limit;
+    return { take: limit, skip };
   }
 }

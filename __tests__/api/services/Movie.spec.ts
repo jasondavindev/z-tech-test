@@ -53,7 +53,7 @@ describe('services/Movie', () => {
 
         await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
 
-        const result = await service.find({ censorshipLevel: CensorshipLevel.Censored });
+        const result = await service.find({ where: { censorshipLevel: CensorshipLevel.Censored } });
 
         expect(result).toHaveLength(4);
       });

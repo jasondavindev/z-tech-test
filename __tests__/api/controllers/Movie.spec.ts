@@ -89,5 +89,15 @@ describe('controller/Movie', () => {
         expect(body).toHaveLength(6);
       });
     });
+
+    describe('pagination', () => {
+      it('applies pagination', async () => {
+        await populateMovie(25);
+
+        expect((await request(app).get('/api/v1/movies')).body).toHaveLength(10);
+        expect((await request(app).get('/api/v1/movies?page=2')).body).toHaveLength(10);
+        expect((await request(app).get('/api/v1/movies?page=3')).body).toHaveLength(5);
+      });
+    });
   });
 });
