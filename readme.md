@@ -9,6 +9,7 @@
 - Jest
 - Docker & Docker compose
 - ESLint
+- Winston
 
 Integrado com GitHub Actions
 
