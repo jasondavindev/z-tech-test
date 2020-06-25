@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { PrimaryGeneratedColumn, Column, Entity, ManyToMany, JoinTable } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, ManyToMany } from 'typeorm';
 
 import { Movie } from '.';
 import BaseModel from './BaseModel';

@@ -1,7 +1,7 @@
 import { BAD_REQUEST } from 'http-status-codes';
 import { HttpError } from 'routing-controllers';
 import Container, { Service } from 'typedi';
-import { FindConditions, UpdateResult } from 'typeorm';
+import { FindConditions } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
 import Movie from '@models/Movie';
@@ -34,15 +34,7 @@ export default class MovieService {
     return this.repository.findOne(options);
   }
 
-  public async findAll(options?: FindConditions<Movie>): Promise<Movie[]> {
+  public async find(options?: FindConditions<Movie>): Promise<Movie[]> {
     return this.repository.find(options);
-  }
-
-  public async update(movie: Movie, options?: FindConditions<Movie>): Promise<UpdateResult> {
-    return this.repository.update(options, movie);
-  }
-
-  public async delete(options?: FindConditions<Movie>): Promise<UpdateResult> {
-    return this.repository.softDelete(options);
   }
 }

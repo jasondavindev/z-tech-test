@@ -5,6 +5,7 @@ import Container from 'typedi';
 import { Connection } from 'typeorm';
 
 import TypeORMLoader from '@/loaders/Typeorm';
+import CensorshipLevel from '@/types/CensorshipLevel';
 import { Movie } from '@models/index';
 import MovieService from '@services/Movie';
 
@@ -37,6 +38,38 @@ describe('services/Movie', () => {
         const actor = buildActor();
         const movie = buildMovie({ actors: [actor] } as Movie);
         expect(await service.create(movie)).toBeDefined();
+      });
+    });
+  });
+
+  describe('#find', () => {
+    beforeEach(() => cleanTables(connection, [Movie]));
+
+    describe('when is passed censorship level', () => {
+      it('the results is filtered by censorship level', async () => {
+        await populateMovie(4, {
+          censorshipLevel: CensorshipLevel.Censored
+        } as Movie);
+
+        await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+
+        const result = await service.find({ censorshipLevel: CensorshipLevel.Censored });
+
+        expect(result).toHaveLength(4);
+      });
+    });
+
+    describe('when is not passed censorship level', () => {
+      it('the results is not filtered', async () => {
+        await populateMovie(4, {
+          censorshipLevel: CensorshipLevel.Censored
+        } as Movie);
+
+        await populateMovie(4, { censorshipLevel: CensorshipLevel.NotCensore } as Movie);
+
+        const result = await service.find();
+
+        expect(result).toHaveLength(8);
       });
     });
   });

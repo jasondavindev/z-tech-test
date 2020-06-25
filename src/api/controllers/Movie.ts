@@ -1,8 +1,17 @@
 import { Response } from 'express';
 import { CREATED, BAD_REQUEST } from 'http-status-codes';
-import { JsonController, Post, BodyParam, Res, HttpError } from 'routing-controllers';
+import {
+  JsonController,
+  Post,
+  BodyParam,
+  Res,
+  HttpError,
+  Get,
+  QueryParam
+} from 'routing-controllers';
 import Container from 'typedi';
 
+import CensorshipLevel from '@/types/CensorshipLevel';
 import { Movie } from '@models/index';
 import MovieService from '@services/Movie';
 
@@ -24,5 +33,14 @@ export default class MovieController {
     if (!createdMovie) throw new HttpError(BAD_REQUEST, 'Movie not created');
 
     return res.sendStatus(CREATED);
+  }
+
+  @Get('/')
+  async index(@QueryParam('censorship') censorshipLevelParam: CensorshipLevel): Promise<Movie[]> {
+    const filter = censorshipLevelParam in CensorshipLevel
+      ? { censorshipLevel: CensorshipLevel[censorshipLevelParam] }
+      : {};
+
+    return this.movieService.find(filter);
   }
 }

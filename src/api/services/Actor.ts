@@ -1,7 +1,6 @@
 import { Service } from 'typedi';
 import { In } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { isNumber } from 'util';
 
 import { Actor } from '@models/index';
 import ActorRepository from '@repositories/Actor';
