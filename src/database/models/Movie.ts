@@ -1,4 +1,4 @@
-import { IsEnum, IsString, IsNotEmpty, IsArray, ArrayMaxSize, IsDateString } from 'class-validator';
+import { IsEnum, IsString, IsNotEmpty, IsArray, ArrayMaxSize, IsDateString, ArrayMinSize } from 'class-validator';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
 
 import CensorshipLevel from '@/types/CensorshipLevel';
@@ -24,6 +24,7 @@ export default class Movie extends BaseModel<Movie> {
   @Column({ name: 'censorship_level' })
   censorshipLevel: string;
 
+  @ArrayMinSize(1, { message: 'a movie can have at least one actor' })
   @ArrayMaxSize(10, { message: 'a movie can have a maximum of ten actors' })
   @IsArray()
   @ManyToMany(() => Actor, (actor) => actor.movies, { eager: true })

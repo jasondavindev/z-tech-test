@@ -44,7 +44,11 @@ export default class MovieController {
       ? { censorshipLevel: CensorshipLevel[censorshipLevelParam] }
       : {};
 
-    return this.movieService.find({ where: filter, ...this.buildPagination({ page }) });
+    return this.movieService.find({
+      where: filter,
+      ...this.buildPagination({ page }),
+      relations: ['actors']
+    });
   }
 
   private buildPagination({ page = 1, limit = 10 }: { page: number; limit?: number }) {

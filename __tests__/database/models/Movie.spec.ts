@@ -40,6 +40,18 @@ describe('models/Movie', () => {
     });
   });
 
+  describe('when has less than one actor', () => {
+    it('returns an error', () => {
+      const movie = buildMovie({ actors: [] } as Movie);
+
+      expect(Validation(movie)).toEqual({
+        actors: {
+          arrayMinSize: 'a movie can have at least one actor'
+        }
+      });
+    });
+  });
+
   describe('when is passed valid data', () => {
     it('returns empty object', () => {
       const movie = buildMovie();

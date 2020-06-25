@@ -20,9 +20,9 @@ export default class MovieService {
   public async create(movie: Movie): Promise<Movie | undefined> {
     if (await this.movieAlreadyExists(movie.name)) throw new HttpError(BAD_REQUEST, 'This movie already exists');
 
-    await this.actorService.findOrCreateList(movie.actors);
+    const actors = await this.actorService.findOrCreateList(movie.actors);
 
-    return this.repository.save(movie);
+    return this.repository.save({ ...movie, actors });
   }
 
   private async movieAlreadyExists(name: string): Promise<boolean> {

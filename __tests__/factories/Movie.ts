@@ -4,12 +4,16 @@ import { getRepository } from 'typeorm';
 import CensorshipLevel from '@/types/CensorshipLevel';
 import Movie from '@models/Movie';
 
+import { buildActor } from './Actor';
+
 export function buildMovie(data?: Movie): Movie {
   const movie = new Movie({
     name: faker.name.jobTitle(),
     releaseDate: faker.date.past().toISOString(),
     censorshipLevel: CensorshipLevel.Censored,
-    actors: []
+    actors: [
+      buildActor()
+    ]
   });
 
   if (data) Object.assign(movie, data);
