@@ -7,8 +7,9 @@ import Movie from '@models/Movie';
 export function buildMovie(data?: Movie): Movie {
   const movie = new Movie({
     name: faker.name.jobTitle(),
-    releaseDate: faker.date.past(),
-    censorshipLevel: CensorshipLevel.Censored
+    releaseDate: faker.date.past().toISOString(),
+    censorshipLevel: CensorshipLevel.Censored,
+    actors: []
   });
 
   if (data) Object.assign(movie, data);

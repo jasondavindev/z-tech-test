@@ -10,7 +10,7 @@ describe('models/Movie', () => {
       const movie = buildMovie({ releaseDate: null } as Movie);
       expect(Validation(movie)).toEqual({
         releaseDate: {
-          isDate: 'releaseDate must be a Date instance'
+          isDateString: 'releaseDate must be a ISOString'
         }
       });
     });
@@ -34,7 +34,7 @@ describe('models/Movie', () => {
 
       expect(Validation(movie)).toEqual({
         actors: {
-          maxLength: 'a movie can have a maximum of ten actors'
+          arrayMaxSize: 'a movie can have a maximum of ten actors'
         }
       });
     });

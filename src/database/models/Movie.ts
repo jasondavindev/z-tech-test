@@ -1,4 +1,4 @@
-import { IsEnum, IsDate, IsString, IsNotEmpty, IsOptional, IsArray, MaxLength } from 'class-validator';
+import { IsEnum, IsString, IsNotEmpty, IsArray, ArrayMaxSize, IsDateString } from 'class-validator';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 import CensorshipLevel from '@/types/CensorshipLevel';
@@ -16,17 +16,16 @@ export default class Movie extends BaseModel<Movie> {
   @IsString()
   name: string;
 
-  @IsDate()
+  @IsDateString()
   @Column({ name: 'release_date' })
-  releaseDate: Date;
+  releaseDate: string;
 
   @IsEnum(CensorshipLevel)
   @Column({ name: 'censorship_level' })
   censorshipLevel: string;
 
-  @IsOptional()
+  @ArrayMaxSize(10, { message: 'a movie can have a maximum of ten actors' })
   @IsArray()
-  @MaxLength(10, { message: 'a movie can have a maximum of ten actors' })
   @OneToMany(() => Actor, (actor) => actor.movie)
   actors?: Actor[];
 }

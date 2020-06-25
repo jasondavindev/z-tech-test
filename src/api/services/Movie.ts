@@ -14,7 +14,7 @@ export default class MovieService {
   public async create(movie: Movie): Promise<Movie | undefined> {
     const movieSameName = await this.findOne({ name: movie.name });
 
-    if (movieSameName) throw new HttpError(BAD_REQUEST, 'Já existe um filme com este nome');
+    if (movieSameName) throw new HttpError(BAD_REQUEST, 'This movie already exists');
 
     return this.repository.save(movie);
   }
