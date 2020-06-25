@@ -1,22 +1,33 @@
 import { BAD_REQUEST } from 'http-status-codes';
 import { HttpError } from 'routing-controllers';
-import { Service } from 'typedi';
+import Container, { Service } from 'typedi';
 import { FindConditions, UpdateResult } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
 import Movie from '@models/Movie';
 import MovieRepository from '@repositories/Movie';
 
+import ActorService from './Actor';
+
 @Service()
 export default class MovieService {
-  constructor(@OrmRepository() private repository: MovieRepository) {}
+  private actorService: ActorService;
+
+  constructor(@OrmRepository() private repository: MovieRepository) {
+    this.actorService = Container.get(ActorService);
+  }
 
   public async create(movie: Movie): Promise<Movie | undefined> {
-    const movieSameName = await this.findOne({ name: movie.name });
+    if (await this.movieAlreadyExists(movie.name)) throw new HttpError(BAD_REQUEST, 'This movie already exists');
 
-    if (movieSameName) throw new HttpError(BAD_REQUEST, 'This movie already exists');
+    await this.actorService.findOrCreateList(movie.actors);
 
     return this.repository.save(movie);
+  }
+
+  private async movieAlreadyExists(name: string): Promise<boolean> {
+    const movie = await this.findOne({ name });
+    return !!movie;
   }
 
   public async findOne(options?: FindConditions<Movie>): Promise<Movie | undefined> {

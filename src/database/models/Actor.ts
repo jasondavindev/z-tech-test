@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Entity } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, ManyToMany, JoinTable } from 'typeorm';
 
 import { Movie } from '.';
 import BaseModel from './BaseModel';
@@ -13,8 +13,6 @@ export default class Actor extends BaseModel<Actor> {
   @Column()
   name: string;
 
-  @IsNotEmpty()
-  @ManyToOne(() => Movie, (movie) => movie.actors)
-  @JoinColumn({ name: 'movie_id' })
-  movie: Movie;
+  @ManyToMany(() => Movie, (movie) => movie.actors)
+  movies?: Movie[];
 }

@@ -3,12 +3,10 @@ import { getRepository } from 'typeorm';
 
 import Actor from '@models/Actor';
 
-import { buildMovie, populateMovie } from './Movie';
-
 export function buildActor(data?: Actor): Actor {
   const actor = new Actor({
     name: faker.name.jobTitle(),
-    movie: buildMovie()
+    movies: []
   });
 
   if (data) Object.assign(actor, data);
@@ -17,9 +15,7 @@ export function buildActor(data?: Actor): Actor {
 }
 
 export async function createActor(data?: Actor): Promise<Actor> {
-  const [movie] = await populateMovie(1);
-
-  const actor = buildActor({ movie } as Actor);
+  const actor = buildActor();
 
   if (data) Object.assign(actor, data);
 

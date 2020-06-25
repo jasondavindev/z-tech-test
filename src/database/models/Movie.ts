@@ -1,5 +1,5 @@
 import { IsEnum, IsString, IsNotEmpty, IsArray, ArrayMaxSize, IsDateString } from 'class-validator';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
 
 import CensorshipLevel from '@/types/CensorshipLevel';
 
@@ -26,6 +26,11 @@ export default class Movie extends BaseModel<Movie> {
 
   @ArrayMaxSize(10, { message: 'a movie can have a maximum of ten actors' })
   @IsArray()
-  @OneToMany(() => Actor, (actor) => actor.movie)
+  @ManyToMany(() => Actor, (actor) => actor.movies, { eager: true })
+  @JoinTable({
+    name: 'movie_actors',
+    joinColumn: { name: 'movie_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'actor_id', referencedColumnName: 'id' }
+  })
   actors?: Actor[];
 }
